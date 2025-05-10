@@ -6,6 +6,7 @@ function CountryDetail() {
   const params = useParams();
   const countryName = params.country;
   const [countryData, setCountryData] = useState(null);
+  const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     fetch(`https://restcountries.com/v3.1/name/${countryName}?fullText=true`)
@@ -15,37 +16,65 @@ function CountryDetail() {
         console.log(CountryDetail.borders);
         setCountryData({
           name: CountryDetail.name.common,
-          flag: CountryDetail.flags.svg,
-          nativeName: Object.values(CountryDetail.name.nativeName)[0].common,
-          population: CountryDetail.population.toLocaleString("en-IN"),
-          region: CountryDetail.region,
-          subRegion: CountryDetail.subregion,
-          capital: CountryDetail.capital.join(", "),
-          tld: CountryDetail.tld,
-          currencies: Object.values(CountryDetail.currencies)
-            .map((currency) => {
-              return currency.name;
-            })
-            .join(", "),
-          languages: Object.values(CountryDetail.languages).join(", "),
+          flag: CountryDetail.flags?.svg,
+          nativeName: CountryDetail.name.nativeName
+            ? Object.values(CountryDetail.name.nativeName)[0].common
+            : "N/A",
+          population:
+            CountryDetail.population?.toLocaleString("en-IN") || "N/A",
+          region: CountryDetail.region || "N/A",
+          subRegion: CountryDetail.subregion || "N/A",
+          capital: CountryDetail.capital
+            ? CountryDetail.capital.join(", ")
+            : "N/A",
+          tld: CountryDetail.tld ? CountryDetail.tld.join(", ") : "N/A",
+          currencies: CountryDetail.currencies
+            ? Object.values(CountryDetail.currencies)
+                .map((currency) => currency.name)
+                .join(", ")
+            : "N/A",
+          languages: CountryDetail.languages
+            ? Object.values(CountryDetail.languages).join(", ")
+            : "N/A",
           borders: [],
         });
 
+        // if (CountryDetail.borders && CountryDetail.borders.length > 0) {
+        //   CountryDetail.borders.forEach((border) => {
+        //     fetch(`https://restcountries.com/v3.1/alpha/${border}`)
+        //       .then((res) => res.json())
+        //       .then(([borderCountry]) => {
+        //         setCountryData((prevState) => ({
+        //           ...prevState,
+        //           borders: [...prevState.borders, borderCountry.name.common],
+        //         }));
+        //       });
+        //   });
+        // }
+
         if (CountryDetail.borders && CountryDetail.borders.length > 0) {
-          CountryDetail.borders.forEach((border) => {
-            fetch(`https://restcountries.com/v3.1/alpha/${border}`)
-              .then((res) => res.json())
-              .then(([borderCountry]) => {
-                setCountryData((prevState) => ({
-                  ...prevState,
-                  borders: [...prevState.borders, borderCountry.name.common],
-                }));
-              });
+          Promise.all(
+            CountryDetail.borders.map((border) => {
+              return fetch(`https://restcountries.com/v3.1/alpha/${border}`)
+                .then((res) => res.json())
+                .then(([borderCountry]) => borderCountry.name.common);
+            })
+          ).then((borderNames) => {
+            setCountryData((prev) => ({
+              ...prev,
+              borders: borderNames,
+            }));
           });
         }
+      })
+      .catch((err) => {
+        setNotFound(true);
       });
   }, [countryName]);
 
+  if (notFound) {
+    return <div>Country Not Found</div>;
+  }
   return countryData === null ? (
     "Loading.........."
   ) : (
