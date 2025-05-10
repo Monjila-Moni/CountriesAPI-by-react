@@ -1,0 +1,265 @@
+* {
+    box-sizing: border-box;
+  }
+  
+  body {
+    --background-color: white;
+    --text-color:black;
+    --elements-color: white;
+    margin: 0;
+    font-family: "Nunito", sans-serif;
+  
+    background-color: var(--background-color);
+    color: var(--text-color);
+  }
+  
+  body.dark{
+    --background-color: hsl(207,26%,17%);
+  --text-color:white;
+  --elements-color: hsl(209, 23%, 22%);
+  }
+  
+  .header-content p a{
+    text-decoration-line: none;
+    color: var(--text-color);
+  }
+  .header-content p a:hover{
+    background-color: #b3a4a4;
+  }
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Ensures it stays on top */
+    background-color: white; /* Needed to avoid transparent overlap */
+    font-size: 18px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding-inline: 64px;
+    background-color: var(--elements-color);
+    color: var(--text-color);
+  }
+  
+  .header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  main {
+    padding: 64px;
+  }
+  
+  .country-details-container {
+    max-width: 1200px;
+    margin-inline: auto;
+  }
+  
+  .back-button {
+    display: inline-block;
+    margin-block: 34px;
+    box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.2);
+    padding-inline: 24px;
+    padding-block: 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    background-color: var(--elements-color);
+  }
+  
+  .back-button:hover {
+    background-color: #b3a4a4;
+  }
+  
+  .country-img-area {
+    max-width: 450px;
+  }
+  .country-img-area img {
+    width: 100%;
+    box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.1);
+  }
+  
+  .country-details {
+    display: flex;
+    align-items: center;
+    column-gap: 84px;
+    margin-top: 64px;
+    flex-wrap: wrap;
+  }
+  
+  .details-text {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    column-gap: 64px;
+    flex-wrap: wrap;
+    max-height: 140px;
+  }
+  .country-name {
+    margin-bottom: 12px;
+  }
+  
+  .details-text p {
+    margin: 0;
+    font-size: 14px;
+  }
+  
+  .border-countries {
+    margin-top: 48px;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .border-countries a {
+    box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.2);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration-line: none;
+    align-items: center;
+    color: var(--text-color);
+    background-color: var(--elements-color);
+  
+  }
+  
+  
+  /* shimmer effect */
+  
+  .shimmer-country-details {
+    display: flex;
+    gap: 64px;
+    flex-wrap: wrap;
+    margin-top: 64px;
+  }
+  
+  .shimmer-img {
+    width: 450px;
+    height: 300px;
+    background: #eee;
+    border-radius: 8px;
+    animation: shimmer 1.6s infinite;
+  }
+  
+  .shimmer-text {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  
+  .shimmer-line {
+    height: 16px;
+    background: #eee;
+    border-radius: 4px;
+    animation: shimmer 1.6s infinite;
+  }
+  
+  .shimmer-line.title {
+    width: 60%;
+    height: 24px;
+  }
+  
+  @keyframes shimmer {
+    0% {
+      background-position: -450px 0;
+    }
+    100% {
+      background-position: 450px 0;
+    }
+  }
+  
+  .shimmer-img,
+  .shimmer-line {
+    background: linear-gradient(
+      to right,
+      #eeeeee 0%,
+      #dddddd 50%,
+      #eeeeee 100%
+    );
+    background-size: 1000px 100%;
+  }
+  
+  
+  /* For screens smaller than 940px (Tablets, Small Laptops) */
+  @media (max-width: 940px) {
+  
+    
+      .country-details-container {
+          flex-direction: column;
+          margin-top: 32px;
+        }
+    
+      .country-img-area {
+        max-width: 500;
+        margin-bottom: 32px;
+      }
+    
+      .details-text {
+        max-height: unset;
+        gap: 12px;
+      }
+    
+      .back-button {
+        margin-block: 14px;
+      }
+  
+    }
+    
+    /* For screens smaller than 768px (Mobile Devices) */
+    @media (max-width: 768px) {
+      main {
+        padding-block: 16px;
+      }
+    
+      .country-img-area {
+        max-width: 400px; /* Limit image size on smaller screens */
+      }
+    
+      .back-button {
+        padding: 8px 16px;
+        font-size: 14px;
+        margin-bottom: 0;
+      }
+    
+      .details-text p {
+        font-size: 14px;
+      }
+    
+      .border-countries a {
+        font-size: 14px;
+        padding: 6px 12px;
+      }
+    }
+    
+    /* For screens smaller than 480px (Very Small Mobile Devices) */
+    @media (max-width: 480px) {
+      .header-content {
+        flex-direction: column;
+        text-align: center;
+        font-size: 16px;
+      }
+    
+      .country-details {
+        gap: 20px;
+      }
+    
+      .back-button {
+        padding: 8px 16px;
+        font-size: 12px;
+      }
+    
+      .country-img-area {
+        margin-bottom: 20px;
+      }
+    
+      .details-text {
+        font-size: 12px;
+      }
+      .border-countries a {
+        font-size: 12px;
+        padding: 8px 16px;
+      }
+    }
+    
+  

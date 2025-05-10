@@ -1,0 +1,185 @@
+* {
+  box-sizing: border-box;
+}
+
+
+
+body {
+ --background-color: white;
+--text-color:black;
+--elements-color: white;
+  margin: 0;
+  font-family: "Nunito", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+
+body.dark{
+  --background-color: hsl(207,26%,17%);
+--text-color:white;
+--elements-color: hsl(209, 23%, 22%);
+}
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000; /* Ensures it stays on top */
+  background-color: white; /* Needed to avoid transparent overlap */
+  font-size: 18px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding-inline: 64px;
+  background-color: var(--elements-color);
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+
+  
+}
+main {
+  padding: 64px;
+}
+
+.search-filter-container{
+  margin-bottom: 64px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin-inline:  auto;
+}
+.search-container{
+  box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2);
+  max-width: 400px;
+  width: 100%;
+  border-radius: 4px;
+  padding-left:  24px;
+  color: #999;
+  overflow: hidden;
+   /* for dark mode */
+ background-color: var(--elements-color);
+ color: var(--text-color);
+}
+.search-container input{
+ border: none;
+ outline: none;
+ padding: 16px;
+ font-size: 18px;
+ width: 90%;
+background-color: inherit;
+color: inherit;
+
+}
+.search-container input::placeholder{
+font-size: 18px;
+}
+
+.filter-by-region {
+  width: 200px;
+  padding: 16px;
+  border: none;
+  outline: none;
+  box-shadow: 0 0 8px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  font-size: 18px;
+
+
+  background-color: var(--elements-color);
+  color: var(--text-color);
+}
+
+/* This will only apply when the placeholder option is selected */
+
+.theme-changer{
+  cursor: pointer;
+}
+
+.country-card {
+  max-width: 250px;
+  box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration-line: none;
+  color: black;
+  background-color: var(--elements-color);
+}
+
+.country-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 16px 0px rgba(0, 0, 0, 0.2);
+}
+.country-img {
+  max-width: 250px;
+}
+.country-img img {
+  width: 100%;
+
+}
+
+.country-content {
+  margin-inline: 24px;
+}
+
+.country-content p {
+  margin-block: 8px;
+}
+.country-content:last-child {
+  padding-bottom: 18px;
+}
+
+.country-content h2 {
+  margin-bottom: 18px;
+}
+
+.countries-container {
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 64px;
+  margin: 0 auto;
+}
+
+
+
+
+
+
+
+@media(max-width: 768px) {
+  .countries-container {
+      justify-content: center;
+  }
+  .search-filter-container{
+    display: flex;
+    flex-direction: column;
+    padding: 12px;
+    gap: 24px;
+    align-items: center;
+  }
+
+  .search-container{
+    padding-left:  12px;
+    color: #999;
+    overflow: hidden;
+  }
+  .search-container input{
+    padding-left: 4px;
+    font-size: 16px;
+    width: 90%;
+    
+   }
+  .search-container input::placeholder{
+    font-size: 14px;
+    }
+.filter-by-region{
+
+  padding: 12px;
+  font-size: 14px;
+}
+
+
+}
