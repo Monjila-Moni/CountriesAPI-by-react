@@ -5,7 +5,7 @@ function CountryCard({name,population,region,capital,flag}) {
 
   return (
     <>
-      <a className="country-card" href={`/country?name=${name}`}>
+      <Link className="country-card" to={`/${name}`}>
           <div className="country-img">
               <img src={flag}/>
           </div>
@@ -16,7 +16,7 @@ function CountryCard({name,population,region,capital,flag}) {
               <p><b>Capital: </b><span>{capital}</span></p>
           </div>
           
-          </a>
+          </Link>
     </>
   )
 }

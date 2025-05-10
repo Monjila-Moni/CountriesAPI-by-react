@@ -22,7 +22,7 @@ function CountriesList({ query }) {
         setLoading(false);
       });
 
-    return () => console.log("Cleaning up...");
+    // return () => console.log("Cleaning up...");
   }, []);
 
   const filteredCountries = countriesData.filter((country) =>
@@ -33,7 +33,6 @@ function CountriesList({ query }) {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    !filteredCountries ? <Shimmer width="200px" height="20px" /> :
     <div className="countries-container">
       {filteredCountries.map((country) => (
         <CountryCard

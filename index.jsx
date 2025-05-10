@@ -1,5 +1,6 @@
 import {createRoot} from 'react-dom/client'
 import { createBrowserRouter,RouterProvider } from 'react-router-dom'
+
 import App from './App';
 import CountryDetail from './components/CountryDetail'
 import Home from './components/Home';
@@ -15,7 +16,7 @@ const router = createBrowserRouter([{
             element: <Home/>
         },
         {
-            path:'/country',
+            path:'/:country',
             element: <CountryDetail/>
         }
     ]
