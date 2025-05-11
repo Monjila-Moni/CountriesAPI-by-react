@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "./CountryDetail.css";
 import { useParams, Link } from "react-router-dom";
+import ShimmerCountryDetail from "./ShimmerCountryDetail";
+
 
 function CountryDetail() {
   const params = useParams();
@@ -75,72 +77,52 @@ function CountryDetail() {
   if (notFound) {
     return <div>Country Not Found</div>;
   }
-  return countryData === null ? (
-    "Loading.........."
-  ) : (
-    <main>
-      <div className="country-details-container">
-        <span className="back-button" onClick={() => window.history.back()}>
-          <i className="fa-solid fa-arrow-left"></i> &nbsp;Back
-        </span>
+  
+  return (
+  <main>
+    <div className="country-details-container">
+      {countryData === null ? <ShimmerCountryDetail/> : (
+        <>
+          <span className="back-button" onClick={() => window.history.back()}>
+            <i className="fa-solid fa-arrow-left"></i> &nbsp;Back
+          </span>
 
-        <div className="country-details">
-          <div className="country-img-area">
-            <img src={countryData.flag} />
-          </div>
-          <div className="details-text-container">
-            <h2 className="country-name">{countryData.name}</h2>
-            <div className="details-text">
-              <p>
-                <b>Native Name: </b>
-                <span>{countryData.nativeName}</span>
-              </p>
-              <p>
-                <b>Population: </b>
-                <span>{countryData.population}</span>
-              </p>
-              <p>
-                <b>Region: </b>
-                <span>{countryData.region}</span>
-              </p>
-              <p>
-                <b>Sub Region: </b>
-                <span>{countryData.subRegion}</span>
-              </p>
-              <p>
-                <b>Capital: </b>
-                <span>{countryData.capital}</span>
-              </p>
-              <p>
-                <b>Top Level Domain: </b>
-                <span>{countryData.tld}</span>
-              </p>
-              <p>
-                <b>Currencies: </b>
-                <span>{countryData.currencies}</span>
-              </p>
-              <p>
-                <b>Languages: </b>
-                <span>{countryData.languages}</span>
-              </p>
+          <div className="country-details">
+            <div className="country-img-area">
+              <img src={countryData.flag} alt={`${countryData.name} Flag`} />
             </div>
-            <div className="border-countries">
-              <b>Border Countries: </b>&nbsp;
-              {countryData.borders.length > 0 ? (
-                countryData.borders.map((borderCountryName, index) => (
-                  <Link key={index} to={`/${borderCountryName}`}>
-                    {borderCountryName}
-                  </Link>
-                ))
-              ) : (
-                <span>No border countries</span>
-              )}
+            <div className="details-text-container">
+              <h2 className="country-name">{countryData.name}</h2>
+              <div className="details-text">
+                <p><b>Native Name: </b><span>{countryData.nativeName}</span></p>
+                <p><b>Population: </b><span>{countryData.population}</span></p>
+                <p><b>Region: </b><span>{countryData.region}</span></p>
+                <p><b>Sub Region: </b><span>{countryData.subRegion}</span></p>
+                <p><b>Capital: </b><span>{countryData.capital}</span></p>
+                <p><b>Top Level Domain: </b><span>{countryData.tld}</span></p>
+                <p><b>Currencies: </b><span>{countryData.currencies}</span></p>
+                <p><b>Languages: </b><span>{countryData.languages}</span></p>
+              </div>
+              <div className="border-countries">
+                <b>Border Countries: </b>&nbsp;
+                {countryData.borders.length > 0 ? (
+                  countryData.borders.map((borderCountryName, index) => (
+                    <Link key={index} to={`/${borderCountryName}`}>
+                      {borderCountryName}
+                    </Link>
+                  ))
+                ) : (
+                  <span>No border countries</span>
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </main>
-  );
+        </>
+      )}
+    </div>
+  </main>
+);
+
 }
 
 export default CountryDetail;

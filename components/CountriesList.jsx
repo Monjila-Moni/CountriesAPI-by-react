@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import CountryCard from "./CountryCard";
+
+import ShimmerCountryList from "./ShimmerCountryList";
 
 function CountriesList({ query }) {
   const [countriesData, setCountriesData] = useState([]);
@@ -21,88 +23,32 @@ function CountriesList({ query }) {
         setError(err.message);
         setLoading(false);
       });
-
-    // return () => console.log("Cleaning up...");
   }, []);
 
   const filteredCountries = countriesData.filter((country) =>
     country.name.common.toLowerCase().includes(query.toLowerCase())
   );
 
-  if (loading) return <p>Loading countries...</p>;
   if (error) return <p>Error: {error}</p>;
 
   return (
     <div className="countries-container">
-      {filteredCountries.map((country) => (
-        <CountryCard
-          key={country.cca3}
-          name={country.name.common}
-          population={country.population.toLocaleString("en-IN")}
-          region={country.region}
-          capital={country.capital?.[0] ?? "N/A"}
-          flag={country.flags?.svg ?? ""}
-        />
-      ))}
+      {loading
+        ? Array(16)
+            .fill(0)
+            .map((_, index) => <ShimmerCountryList key={index} />)
+        : filteredCountries.map((country) => (
+            <CountryCard
+              key={country.cca3}
+              name={country.name.common}
+              population={country.population.toLocaleString("en-IN")}
+              region={country.region}
+              capital={country.capital?.[0] ?? "N/A"}
+              flag={country.flags?.svg ?? ""}
+            />
+          ))}
     </div>
   );
 }
 
 export default CountriesList;
-
-//using implicit data
-// function CountriesList({ query }) {
-//   const filteredCountries = countries_data.filter((country) => {
-//     return country.name.common.toLowerCase().includes(query.toLowerCase());
-//   });
-
-//   //'Monjila'.includes('') -> its return true. initially query is empty so filteredCountries will all the country value
-//   const array = filteredCountries.map((country, i) => {
-//     // console.log(country.region);
-//     return (
-//       <CountryCard
-//         key={i}
-//         name={country.name.common}
-//         population={country.population.toLocaleString("en-IN")}
-//         region={country.region}
-//         capital={country.capital?.[0]}
-//         flag={country.flags.svg}
-//       />
-//     );
-//   });
-//   return <div className="countries-container">{array}</div>;
-// }
-
-//how to return array
-// function CountriesList() {
-
-//   const array = [
-//     <CountryCard />,
-//     <CountryCard/>,
-//     <CountryCard/>,
-//     <CountryCard/>,
-//     <CountryCard/>
-// ]
-//   return (
-//     <div className="countries-container">{array}</div>
-//   )
-// }
-
-// function CountriesList() {
-//   return (
-//     <div className="countries-container">
-//         {
-//             [
-//                 <CountryCard />,
-//                 <CountryCard/>,
-//                 <CountryCard/>,
-//                 <CountryCard/>,
-//                 <CountryCard/>
-//             ]
-//         }
-
-//     </div>
-//   )
-// }
-
-
