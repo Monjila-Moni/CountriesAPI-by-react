@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import "./CountryDetail.css";
-import { useParams, Link, useLocation } from "react-router-dom";
+import { useParams, Link, useLocation, useOutletContext } from "react-router-dom";
 import ShimmerCountryDetail from "./ShimmerCountryDetail";
 
 
@@ -11,6 +11,7 @@ function CountryDetail() {
 
 
   const params = useParams();
+  const [isDark] = useOutletContext()
   const countryName = params.country;
   const [countryData, setCountryData] = useState(null);
   const [notFound, setNotFound] = useState(false);
@@ -97,8 +98,10 @@ function CountryDetail() {
     return <div>Country Not Found</div>;
   }
 
+
+ 
   return (
-    <main>
+    <main  className={`${isDark? 'dark': ''}`}>
       <div className="country-details-container">
         {
           countryData === null ? <ShimmerCountryDetail /> : (

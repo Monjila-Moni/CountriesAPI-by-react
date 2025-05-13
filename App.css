@@ -10,12 +10,14 @@ body {
 --elements-color: white;
   margin: 0;
   font-family: "Nunito", sans-serif;
+  
+}
+main, header{
   background-color: var(--background-color);
   color: var(--text-color);
 }
 
-
-body.dark{
+main.dark,header.dark{
   --background-color: hsl(207,26%,17%);
 --text-color:white;
 --elements-color: hsl(209, 23%, 22%);
@@ -41,6 +43,7 @@ header {
 }
 main {
   padding: 64px;
+  min-height: calc(100vh - 57px);
 }
 
 .search-filter-container{
