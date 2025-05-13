@@ -100,7 +100,7 @@ font-size: 18px;
 }
 
 .country-card {
-  max-width: 250px;
+
   box-shadow: 0 0 4px 0px rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   overflow: hidden;
@@ -115,7 +115,6 @@ font-size: 18px;
   box-shadow: 0 0 16px 0px rgba(0, 0, 0, 0.2);
 }
 .country-img {
-  max-width: 250px;
 height: 160px;
 }
 .country-img img {
@@ -142,9 +141,11 @@ height: 160px;
 
 .countries-container {
   max-width: 1200px;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  /* justify-content: space-between;
+  flex-wrap: wrap; */
   gap: 64px;
   margin: 0 auto;
 }

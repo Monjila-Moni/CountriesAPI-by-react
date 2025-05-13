@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import { useTheme } from "../hooks/useTheme";
 
-function Header({ theme }) {
-  const [isDark, setIsDark] = theme
+function Header() {
+  // const [isDark, setIsDark] = useContext(ThemeContext);
+  const [isDark,setIsDark] = useTheme()
   // const [isDark, setIsDark] = useState(() => {
   //   const saved = localStorage.getItem('isDarkMode')
   //   return saved ? JSON.parse(saved) : false
