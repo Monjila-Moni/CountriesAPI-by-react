@@ -1,46 +1,72 @@
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { useTheme } from "../hooks/useTheme";
 
 function ShimmerCountryDetail() {
+  const [isDark] = useTheme();
+
+  const baseColor = isDark ? "#2c2c2c" : "#e0e0e0";
+  const highlightColor = isDark ? "#444" : "#f5f5f5";
+
   return (
     <div className="country-details-container" aria-busy="true">
-
-      {/* Country Details Skeleton */}
-      <div className="country-details shimmer-country-details">
-        {/* Flag/Image Placeholder */}
-        
-          <div className="country-img-area">
-            <Skeleton height={200} width={400}/>
-          </div>
-        
+      <div className="shimmer-country-details">
+        {/* Flag/Image Skeleton */}
+        <div className="shimmer-flag">
+          <Skeleton
+            height="100%"
+            width="100%"
+            baseColor={baseColor}
+            highlightColor={highlightColor}
+            style={{ borderRadius: "8px", aspectRatio: "16 / 9" }}
+          />
+        </div>
 
         {/* Text Section */}
-        <div className="details-text-container shimmer-text-area" style={{ flex: 1 }}>
-          {/* Country Name */}
-          <h2><Skeleton width={200} height={32}  /></h2>
+        <div className="shimmer-text">
+          <h2>
+            <Skeleton
+              width="60%"
+              height={32}
+              baseColor={baseColor}
+              highlightColor={highlightColor}
+            />
+          </h2>
 
-          {/* Details Paragraphs */}
           <div className="details-text">
-            <p><Skeleton width={250} height={16} /></p>
-          <p><Skeleton width={280} height={16} /></p>
-          <p><Skeleton width={220} height={16} /></p>
-          <p><Skeleton width={300} height={16} /></p>
-          <p><Skeleton width={270} height={16} /></p>
-          <p><Skeleton width={200} height={16} /></p>
-          <p><Skeleton width={260} height={16} /></p>
-          <p><Skeleton width={280} height={16} /></p>
+            {[250, 280, 220, 300, 270, 200, 260, 280].map((width, i) => (
+              <p key={i}>
+                <Skeleton
+                  width="100%"
+                  height={16}
+                  baseColor={baseColor}
+                  highlightColor={highlightColor}
+                />
+              </p>
+            ))}
           </div>
 
-          {/* Border Countries Label */}
+          {/* Border Countries */}
           <h4 style={{ marginTop: "24px" }}>
-            <Skeleton width={180} height={16} />
+            <Skeleton
+              width="50%"
+              height={16}
+              baseColor={baseColor}
+              highlightColor={highlightColor}
+            />
           </h4>
 
-          {/* Border Country Skeleton Buttons */}
-          <div className="border-countries" style={{ gap: "8px" }}>
-            <Skeleton height={32} width={80} borderRadius={8} />
-            <Skeleton height={32} width={80} borderRadius={8} />
-            <Skeleton height={32} width={80} borderRadius={8} />
+          <div className="shimmer-borders">
+            {[1, 2, 3].map((i) => (
+              <Skeleton
+                key={i}
+                height={32}
+                width={80}
+                baseColor={baseColor}
+                highlightColor={highlightColor}
+                style={{ borderRadius: "8px" }}
+              />
+            ))}
           </div>
         </div>
       </div>

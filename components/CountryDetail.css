@@ -50,7 +50,55 @@ main.dark,header.dark{
   main {
     padding: 64px;
   }
-  
+
+ /* Container for the shimmer */
+.shimmer-country-details {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Image area (flag placeholder) */
+.shimmer-flag {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Text section (details and borders) */
+.shimmer-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Border countries skeleton layout */
+.shimmer-borders {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* Responsive layout for larger screens */
+@media (min-width: 768px) {
+  .shimmer-country-details {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+
+  .shimmer-flag {
+    flex: 1;
+    max-width: 500px;
+  }
+
+  .shimmer-text {
+    flex: 1;
+    padding-left: 40px;
+  }
+}
+
   .country-details-container {
     max-width: 1200px;
     margin-inline: auto;
