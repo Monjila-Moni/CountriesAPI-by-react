@@ -34,19 +34,20 @@ function CountriesList({ query }) {
   return (
     <div className="countries-container">
       {loading
-        ? Array(16)
-            .fill(0)
-            .map((_, index) => <ShimmerCountryList key={index} />)
+        ? Array(12)
+          .fill(0)
+          .map((_, index) => <ShimmerCountryList key={index} />)
         : filteredCountries.map((country) => (
-            <CountryCard
-              key={country.cca3}
-              name={country.name.common}
-              population={country.population.toLocaleString("en-IN")}
-              region={country.region}
-              capital={country.capital?.[0] ?? "N/A"}
-              flag={country.flags?.svg ?? ""}
-            />
-          ))}
+          <CountryCard
+            key={country.cca3}
+            name={country.name.common}
+            population={country.population.toLocaleString("en-IN")}
+            region={country.region}
+            capital={country.capital?.[0] ?? "N/A"}
+            flag={country.flags?.svg ?? ""}
+            data={country}
+          />
+        ))}
     </div>
   );
 }
